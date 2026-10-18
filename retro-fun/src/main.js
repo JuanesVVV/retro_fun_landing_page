@@ -1,60 +1,76 @@
-import './style.css'
-import heroImg from './assets/hero.png'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import { setupCounter } from './counter.js'
+import '@fontsource/pixelify-sans/700.css';
+import './style.css';
+import './js/analytics.js';
+import './js/hubspot.js';
+import logoText from './assets/images/logo-text.png';
+document.querySelector('.logo img').src = logoText;
+import { games } from './data/games.js';
 
-document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+//  Catálogo 
 
-<div class="ticks"></div>
+  const grid = document.getElementById('catalog-grid');
+  grid.innerHTML = games.map(g => `
+    <a href="#juegos" class="game" data-event="click_juego" data-game="${g.name}">
+      <div class="game__thumb" style="background:${g.color}"></div>
+      <div class="game__name"><span>${g.name}</span><span aria-hidden="true">›</span></div>
+    </a>
+  `).join('');
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+//  FAQ (acordeón)
 
-setupCounter(document.querySelector('#counter'))
+//  Carrusel de testimonios 
+
+  const track = document.getElementById('track');
+  const slides = track.children;
+  const dots = document.getElementById('dots');
+  let index = 0;
+
+// Cuántas tarjetas se ven a la vez (3 en escritorio, 1 en móvil)
+  const perView = () => (window.innerWidth <= 768 ? 1 : 3);
+  const maxIndex = () => Math.max(0, slides.length - perView());
+
+  dots.innerHTML = [...slides].map((_, i) =>
+    `<button aria-label="Ir al testimonio ${i + 1}" data-i="${i}"></button>`
+  ).join('');
+
+  function update() {
+    index = Math.min(index, maxIndex());
+    const step = slides[0].offsetWidth + 16; // ancho + gap
+    track.style.transform = `translateX(-${index * step}px)`;
+    [...dots.children].forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  document.getElementById('next').addEventListener('click', () => {
+    index = index >= maxIndex() ? 0 : index + 1;
+    update();
+  });
+  document.getElementById('prev').addEventListener('click', () => {
+    index = index <= 0 ? maxIndex() : index - 1;
+    update();
+  });
+  dots.addEventListener('click', e => {
+    if (e.target.dataset.i) { index = Number(e.target.dataset.i); update(); }
+  });
+  window.addEventListener('resize', update);
+  update();
+
+// (los agregamos cuando maquetemos esas secciones)
+
+// Formulario (validación y mensaje; HubSpot se conecta después) 
+  const form = document.getElementById('newsletter-form');
+  const msg = document.getElementById('form-msg');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      msg.textContent = 'Revisa los campos e inténtalo de nuevo.';
+      return;
+  }
+
+// TODO: enviar a HubSpot desde js/hubspot.js y lanzar el evento form_newsletter
+  msg.textContent = '¡Gracias! Te avisaremos de las novedades.';
+  form.reset();
+});
+

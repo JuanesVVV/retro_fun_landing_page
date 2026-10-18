@@ -1,13 +1,300 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>retro-fun</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retro Fun | Los clásicos, a todo color</title>
+  <meta name="description" content="Juega los mejores videojuegos retro en tu navegador. Sin descargas, sin complicaciones." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- GTM (head): lo pegamos aquí en el paso de analítica -->
+  
+</head>
+<body>
+
+  <!-- GTM (noscript): aquí también -->
+
+  <!-- 1. Header -->
+    <header id="inicio" class="header">
+      <div class="container header__inner">
+        <a href="#inicio" class="logo">
+          <img src="/src/assets/images/logo-text.jpeg" alt="Retro Fun, inicio" />
+        </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#juegos">Juegos</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <a href="#juegos" class="btn btn--primary" data-event="click_jugar">¡Jugar ahora!</a>
+  </div>
+</header>
+<main>
+
+  <!-- 2. Hero -->
+    <section class="hero section">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <h1>Los clásicos,<br />a todo <span class="hero__color">color</span></h1>
+          <p>Revive la magia de los videojuegos retro en un solo lugar. Juega, explora y disfruta de los mejores clásicos, siempre que quieras.</p>
+          <div class="hero__actions">
+            <a href="#juegos" class="btn btn--primary" data-event="click_jugar">Explorar juegos</a>
+            <a href="#como-funciona" class="btn btn--outline">Conoce Retro Fun</a>
+          </div>
+        </div>
+        <img class="hero__img" src="/src/assets/images/hero/controller.png" alt="Mando de videojuegos retro con el logo Retro Fun" />
+      </div>
+    </section>
+      
+  
+  <!-- 3. Beneficios -->
+    <section class="benefits section">
+      <div class="container">
+        <h2 class="section__title">¿Por qué elegir Retro Fun?</h2>
+        <div class="benefits__grid">
+          <article class="card benefit">
+            <span class="benefit__icon" aria-hidden="true">🏆</span>
+            <h3>Diversión inmediata</h3>
+            <p>Sin descargas, sin complicaciones. Solo juega y disfruta.</p>
+          </article>
+          <article class="card benefit">
+            <span class="benefit__icon" aria-hidden="true">💎</span>
+            <h3>Clásicos inolvidables</h3>
+            <p>Los mejores juegos de toda la historia, en un solo lugar.</p>
+          </article>
+          <article class="card benefit">
+            <span class="benefit__icon" aria-hidden="true">⚡</span>
+            <h3>Controles sencillos</h3>
+            <p>Una experiencia fácil de usar para que te concentres en lo importante: jugar.</p>
+          </article>
+          <article class="card benefit">
+            <span class="benefit__icon" aria-hidden="true">📱</span>
+            <h3>En todos tus dispositivos</h3>
+            <p>Disfrútalo en tu computador, tablet o celular, donde y cuando quieras.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CTA: catálogo de juegos -->
+      <section id="juegos" class="catalog section">
+        <div class="container">
+          <h2 class="section__title">Nuestro catálogo de juegos</h2>
+          <div class="catalog__grid" id="catalog-grid"></div>
+          <div class="catalog__cta">
+            <a href="#juegos" class="btn btn--primary" data-event="click_jugar">Ver todos los juegos</a>
+          </div>
+        </div>
+      </section>
+
+
+    <!-- 5. Explicación: cómo funciona -->
+      <section id="como-funciona" class="how section">
+        <div class="container">
+          <h2 class="section__title">Cómo funciona</h2>
+          <ol class="how__steps">
+            <li class="card step">
+              <span class="step__num">1</span>
+              <span class="step__icon" aria-hidden="true">🎮</span>
+              <h3>Elige un juego</h3>
+              <p>Explora nuestro catálogo y encuentra tu favorito.</p>
+            </li>
+            <li class="card step">
+              <span class="step__num">2</span>
+              <span class="step__icon" aria-hidden="true">▶️</span>
+              <h3>Inicia la partida</h3>
+              <p>Haz clic y comienza a jugar al instante.</p>
+            </li>
+            <li class="card step">
+              <span class="step__num">3</span>
+              <span class="step__icon" aria-hidden="true">🏆</span>
+              <h3>Supera tu récord</h3>
+              <p>Mejora tu puntuación y desafía a tus amigos.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+
+    <!-- 6. Testimonios -->
+      <section id="testimonios" class="testimonials section">
+        <div class="container">
+          <h2 class="section__title">Lo que dicen nuestros jugadores</h2>
+          <div class="carousel" aria-roledescription="carrusel">
+            <button class="carousel__btn" id="prev" aria-label="Anterior">‹</button>
+            <div class="carousel__viewport">
+              <div class="carousel__track" id="track">
+                <article class="card testimonial">
+                  <div class="testimonial__head">
+                    <span class="testimonial__avatar" aria-hidden="true">🧑</span>
+                    <span class="testimonial__stars" aria-label="5 estrellas">★★★★★</span>
+                  </div>
+                  <p>“Retro Fun me devolvió la nostalgia. ¡Los juegos cargan rápido y la experiencia es increíble en el celular!”</p>
+                  <strong>Andrés G.</strong>
+                  <small>Jugador desde 2024</small>
+                </article>
+                <article class="card testimonial">
+                  <div class="testimonial__head">
+                    <span class="testimonial__avatar" aria-hidden="true">👩</span>
+                    <span class="testimonial__stars" aria-label="5 estrellas">★★★★★</span>
+                  </div>
+                  <p>“La variedad de juegos es increíble. Me encanta poder revivir los clásicos sin complicaciones.”</p>
+                  <strong>Laura M.</strong>
+                  <small>Jugadora desde 2024</small>
+                </article>
+                <article class="card testimonial">
+                  <div class="testimonial__head">
+                    <span class="testimonial__avatar" aria-hidden="true">🧔</span>
+                    <span class="testimonial__stars" aria-label="5 estrellas">★★★★★</span>
+                  </div>
+                  <p>“Perfecto para pasar el rato. La interfaz es súper intuitiva y se controla genial con los videojuegos retro.”</p>
+                  <strong>Carlos R.</strong>
+                  <small>Jugador desde 2024</small>
+                </article>
+              </div>
+            </div>
+            <button class="carousel__btn" id="next" aria-label="Siguiente">›</button>
+          </div>
+          <div class="carousel__dots" id="dots"></div>
+        </div>
+      </section>
+
+    <!-- 7. CTA 2: formulario -->
+      <section id="newsletter" class="cta section">
+        <div class="container cta__inner">
+          <div class="cta__text">
+            <h2>¿Listo para superar tu récord?</h2>
+            <p>Únete a la diversión y descubre todo lo que Retro Fun tiene para ti.</p>
+          </div>
+
+          <form class="cta__form" id="newsletter-form" novalidate>
+            <div class="cta__fields">
+              <label class="field">
+                <span class="visually-hidden">Tu nombre</span>
+                <input type="text" name="firstname" placeholder="Tu nombre" required autocomplete="given-name" />
+              </label>
+              <label class="field">
+                <span class="visually-hidden">Tu correo electrónico</span>
+                <input type="email" name="email" placeholder="Tu correo electrónico" required autocomplete="email" />
+              </label>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" name="consent" required />
+              <span>Acepto recibir novedades y acepto la <a href="#" class="link">Política de privacidad</a>.</span>
+            </label>
+
+            <button type="submit" class="btn btn--primary">Quiero recibir novedades ›</button>
+            <p class="form__msg" id="form-msg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+    <!-- 8. FAQ -->
+      <section id="faq" class="faq section">
+        <div class="container">
+          <h2 class="section__title">Preguntas frecuentes</h2>
+          <div class="faq__grid">
+            <details class="faq__item">
+              <summary>¿Necesito registrarme para jugar?</summary>
+              <p>No. Entras al catálogo, eliges un juego y empiezas a jugar al instante.</p>
+            </details>
+            <details class="faq__item">
+              <summary>¿Qué tipos de juegos hay?</summary>
+              <p>Clásicos de puzzle, arcade, plataformas, carreras y naves, entre otros.</p>
+            </details>
+            <details class="faq__item">
+              <summary>¿En qué dispositivos puedo jugar?</summary>
+              <p>En computador, tablet y celular, desde cualquier navegador moderno.</p>
+            </details>
+            <details class="faq__item">
+              <summary>¿Es seguro mi información?</summary>
+              <p>Solo guardamos los datos que nos compartes en el formulario y los tratamos según nuestra política de privacidad.</p>
+            </details>
+            <details class="faq__item">
+              <summary>¿Los juegos son gratuitos?</summary>
+              <p>Sí, todos los juegos del catálogo son gratuitos.</p>
+            </details>
+            <details class="faq__item">
+              <summary>¿Puedo sugerir un juego?</summary>
+              <p>Claro. Escríbenos a hola@retrofun.com o usa el botón “Danos tu opinión”.</p>
+            </details>
+            <details class="faq__item">
+              <summary>¿Cómo guardo mis puntuaciones?</summary>
+              <p>Tu récord se guarda en tu navegador para que puedas superarlo en la próxima partida.</p>
+            </details>
+            <details class="faq__item">
+              <summary>¿Cómo contacto al equipo de soporte?</summary>
+              <p>Escríbenos a hola@retrofun.com y te responderemos lo antes posible.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+    <!-- 9. Pre-footer -->
+      <section class="prefooter section">
+        <div class="container prefooter__inner">
+          <a href="#inicio" class="logo logo--full">
+            <img src="/src/assets/images/hero/controller.png" alt="Retro Fun" />
+          </a>
+          <div class="prefooter__text">
+            <h2>Juega. Explora. Revive.</h2>
+            <p>La mejor experiencia en videojuegos clásicos, siempre contigo.</p>
+          </div>
+          <a href="#juegos" class="btn btn--primary" data-event="click_jugar">Jugar ahora ›</a>
+        </div>
+      </section>
+      </main>
+
+    <!-- 10. Footer -->
+      <footer class="footer">
+        <div class="container footer__inner">
+          <div class="footer__brand">
+            <a href="#inicio" class="logo logo--full">
+              <img src="/src/assets/images/hero/controller.png" alt="Retro Fun" />
+            </a>
+            <p>Los clásicos nunca mueren.</p>
+            <div class="footer__social">
+              <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" data-event="click_red_social" data-network="instagram">IG</a>
+              <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" data-event="click_red_social" data-network="facebook">FB</a>
+              <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube" data-event="click_red_social" data-network="youtube">YT</a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok" data-event="click_red_social" data-network="tiktok">TT</a>
+            </div>
+          </div>
+
+          <nav class="footer__col" aria-label="Navegación del pie">
+            <h3>Navegación</h3>
+            <a href="#inicio">Inicio</a>
+            <a href="#juegos">Juegos</a>
+            <a href="#como-funciona">Cómo funciona</a>
+            <a href="#testimonios">Testimonios</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+
+          <div class="footer__col">
+            <h3>Contacto</h3>
+            <a href="mailto:hola@retrofun.com">hola@retrofun.com</a>
+            <span>¡Estamos aquí para ayudarte!</span>
+          </div>
+
+          <div class="footer__col">
+            <h3>Legal</h3>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Términos de uso</a>
+            <a href="#">Política de cookies</a>
+          </div>
+        </div>
+        <p class="footer__copy container">© 2024 Retro Fun. Todos los derechos reservados.</p>
+      </footer>
+      
+
+    <!-- Botón flotante de feedback (Contentsquare después) -->
+      <button type="button" class="feedback-btn" id="feedback-btn">💬 Danos tu opinión</button>
+
+
+<script type="module" src="/src/main.js"></script>
+</body>
 </html>
