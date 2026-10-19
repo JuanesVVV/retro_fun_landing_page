@@ -1,7 +1,7 @@
 import '@fontsource/pixelify-sans/700.css';
 import './style.css';
 import { trackNewsletter } from './js/analytics.js';
-import './js/hubspot.js';
+import { sendToHubSpot } from './js/hubspot.js';
 import logoText from './assets/images/logo-text.png';
 document.querySelector('.logo img').src = logoText;
 import { games } from './data/games.js';
@@ -57,21 +57,36 @@ import { games } from './data/games.js';
 
 // (los agregamos cuando maquetemos esas secciones)
 
-// Formulario (validación y mensaje; HubSpot se conecta después) 
-  const form = document.getElementById('newsletter-form');
-  const msg = document.getElementById('form-msg');
+// ===== Formulario (validación + HubSpot + evento) =====
+const form = document.getElementById('newsletter-form');
+const msg = document.getElementById('form-msg');
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      msg.textContent = 'Revisa los campos e inténtalo de nuevo.';
-      return;
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    msg.textContent = 'Revisa los campos e inténtalo de nuevo.';
+    return;
   }
 
-  // TODO: enviar a HubSpot desde js/hubspot.js
-  trackNewsletter();
-  msg.textContent = '¡Gracias! Te avisaremos de las novedades.';
-  form.reset();
+  const button = form.querySelector('button[type="submit"]');
+  const data = new FormData(form);
+  button.disabled = true;
+  msg.textContent = 'Enviando...';
+
+  try {
+    await sendToHubSpot({
+      firstname: data.get('firstname'),
+      email: data.get('email'),
+    });
+    trackNewsletter();   // evento form_newsletter, solo si HubSpot aceptó el envío
+    msg.textContent = '¡Gracias! Te avisaremos de las novedades.';
+    form.reset();
+  } catch (err) {
+    console.error(err);
+    msg.textContent = 'No pudimos enviar tus datos. Inténtalo de nuevo.';
+  } finally {
+    button.disabled = false;
+  }
 });
 
