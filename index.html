@@ -173,7 +173,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </section>
 
+    <!-- 7. CTA 2: formulario -->
+      <section id="newsletter" class="cta section">
+        <div class="container cta__inner">
+          <div class="cta__text">
+            <h2>¿Listo para superar tu récord?</h2>
+            <p>Únete a la diversión y descubre todo lo que Retro Fun tiene para ti.</p>
+          </div>
 
+          <form class="cta__form" id="newsletter-form" novalidate>
+            <div class="cta__fields">
+              <label class="field">
+                <span class="visually-hidden">Tu nombre</span>
+                <input type="text" name="firstname" placeholder="Tu nombre" required autocomplete="given-name" />
+              </label>
+              <label class="field">
+                <span class="visually-hidden">Tu correo electrónico</span>
+                <input type="email" name="email" placeholder="Tu correo electrónico" required autocomplete="email" />
+              </label>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" name="consent" required />
+              <span>Acepto recibir novedades y acepto la <a href="#" class="link">Política de privacidad</a>.</span>
+            </label>
+
+            <button type="submit" class="btn btn--primary">Quiero recibir novedades ›</button>
+            <p class="form__msg" id="form-msg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
 
     <!-- 8. FAQ -->
       <section id="faq" class="faq section">
