@@ -27,7 +27,9 @@ export async function sendToHubSpot({ firstname, email }) {
     body: JSON.stringify(payload),
   });
 
-  if (!res.ok) {
+      if (!res.ok) {
+    const detail = await res.text();
+    console.error('HubSpot error', res.status, detail);
     throw new Error(`HubSpot respondió ${res.status}`);
   }
   return res.json();
