@@ -1,6 +1,6 @@
 import '@fontsource/pixelify-sans/700.css';
 import './style.css';
-import './js/analytics.js';
+import { trackNewsletter } from './js/analytics.js';
 import './js/hubspot.js';
 import logoText from './assets/images/logo-text.png';
 document.querySelector('.logo img').src = logoText;
@@ -69,7 +69,8 @@ import { games } from './data/games.js';
       return;
   }
 
-// TODO: enviar a HubSpot desde js/hubspot.js y lanzar el evento form_newsletter
+  // TODO: enviar a HubSpot desde js/hubspot.js
+  trackNewsletter();
   msg.textContent = '¡Gracias! Te avisaremos de las novedades.';
   form.reset();
 });
