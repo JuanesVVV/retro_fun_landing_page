@@ -5,6 +5,11 @@ import { sendToHubSpot } from './js/hubspot.js';
 import logoText from './assets/images/logo-text.png';
 document.querySelector('.logo img').src = logoText;
 import { games } from './data/games.js';
+import controller from './assets/images/hero/controller.webp';
+
+document.querySelectorAll('.logo--full img').forEach(img => {
+  img.src = controller;
+});
 
 //  Catálogo 
 
