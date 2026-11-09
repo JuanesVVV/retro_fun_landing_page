@@ -98,7 +98,20 @@
   }
   .hero p { color: var(--text-muted); max-width: 46ch; margin-block: 1.25rem 1.75rem; }
   .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
-  .hero__img { width: 100%; max-width: 520px; margin-inline: auto; }
+  .hero__img {
+  display: block;
+  width: 100%;
+  max-width: 520px;   /* el tamaño máximo que quieras en escritorio */
+  height: auto;       /* respeta la proporción real de la imagen */
+  object-fit: contain;
+}
+
+/* El contenedor de la imagen no debe recortar ni fijar altura */
+.hero__media {        /* usa el nombre real de tu contenedor */
+  overflow: visible;
+  height: auto;
+  aspect-ratio: auto;
+}
 
 
 /*  3. BENEFICIOS  */
