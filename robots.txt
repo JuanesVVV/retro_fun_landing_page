@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://juanesvvv.github.io/retro_fun_landing_page/sitemap.xml
