@@ -1,66 +1,65 @@
-import '@fontsource/pixelify-sans/700.css';
+import '@fontsource/pixelify-sans/latin-700.css';
 import './style.css';
 import { trackNewsletter } from './js/analytics.js';
 import { sendToHubSpot } from './js/hubspot.js';
-import logoText from './assets/images/logo-text.png';
-document.querySelector('.logo img').src = logoText;
 import { games } from './data/games.js';
-import controller from './assets/images/hero/controller.webp';
 
-document.querySelectorAll('.logo--full img').forEach(img => {
-  img.src = controller;
-});
+// ===== Catálogo =====
+const grid = document.getElementById('catalog-grid');
+grid.innerHTML = games.map(g => `
+  <a href="#juegos" class="game" data-event="click_juego" data-game="${g.name}">
+    <div class="game__thumb" style="background:${g.color}"></div>
+    <div class="game__name"><span>${g.name}</span><span aria-hidden="true">›</span></div>
+  </a>
+`).join('');
 
-//  Catálogo 
-
-  const grid = document.getElementById('catalog-grid');
-  grid.innerHTML = games.map(g => `
-    <a href="#juegos" class="game" data-event="click_juego" data-game="${g.name}">
-      <div class="game__thumb" style="background:${g.color}"></div>
-      <div class="game__name"><span>${g.name}</span><span aria-hidden="true">›</span></div>
-    </a>
-  `).join('');
-
-
-//  FAQ (acordeón)
-
-//  Carrusel de testimonios 
-
-  const track = document.getElementById('track');
-  const slides = track.children;
-  const dots = document.getElementById('dots');
-  let index = 0;
+// ===== Carrusel de testimonios =====
+const track = document.getElementById('track');
+const slides = track.children;
+const dots = document.getElementById('dots');
+let index = 0;
 
 // Cuántas tarjetas se ven a la vez (3 en escritorio, 1 en móvil)
-  const perView = () => (window.innerWidth <= 768 ? 1 : 3);
-  const maxIndex = () => Math.max(0, slides.length - perView());
+const perView = () => (window.innerWidth <= 768 ? 1 : 3);
+const maxIndex = () => Math.max(0, slides.length - perView());
 
-  dots.innerHTML = [...slides].map((_, i) =>
-    `<button aria-label="Ir al testimonio ${i + 1}" data-i="${i}"></button>`
-  ).join('');
+dots.innerHTML = [...slides].map((_, i) =>
+  `<button type="button" aria-label="Ir al testimonio ${i + 1}" data-i="${i}"></button>`
+).join('');
 
-  function update() {
-    index = Math.min(index, maxIndex());
-    const step = slides[0].offsetWidth + 16; // ancho + gap
-    track.style.transform = `translateX(-${index * step}px)`;
-    [...dots.children].forEach((d, i) => d.classList.toggle('active', i === index));
-  }
+function update() {
+  index = Math.min(index, maxIndex());
+  const step = slides[0].offsetWidth + 16; // ancho + gap
+  track.style.transform = `translateX(-${index * step}px)`;
+  [...dots.children].forEach((d, i) => d.classList.toggle('active', i === index));
+}
 
-  document.getElementById('next').addEventListener('click', () => {
-    index = index >= maxIndex() ? 0 : index + 1;
-    update();
-  });
-  document.getElementById('prev').addEventListener('click', () => {
-    index = index <= 0 ? maxIndex() : index - 1;
-    update();
-  });
-  dots.addEventListener('click', e => {
-    if (e.target.dataset.i) { index = Number(e.target.dataset.i); update(); }
-  });
-  window.addEventListener('resize', update);
+document.getElementById('next').addEventListener('click', () => {
+  index = index >= maxIndex() ? 0 : index + 1;
   update();
+});
+document.getElementById('prev').addEventListener('click', () => {
+  index = index <= 0 ? maxIndex() : index - 1;
+  update();
+});
+dots.addEventListener('click', e => {
+  if (e.target.dataset.i) { index = Number(e.target.dataset.i); update(); }
+});
 
-// (los agregamos cuando maquetemos esas secciones)
+// Recalcular al cambiar de tamaño (con rAF para no saturar)
+let ticking = false;
+window.addEventListener('resize', () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => { update(); ticking = false; });
+});
+update();
+
+// ===== Menú móvil: se cierra al elegir una sección =====
+const navMobile = document.querySelector('.nav-mobile');
+navMobile?.addEventListener('click', e => {
+  if (e.target.closest('a')) navMobile.open = false;
+});
 
 // ===== Formulario (validación + HubSpot + evento) =====
 const form = document.getElementById('newsletter-form');
@@ -94,4 +93,3 @@ form.addEventListener('submit', async (e) => {
     button.disabled = false;
   }
 });
-
