@@ -1,4 +1,3 @@
-import '@fontsource/pixelify-sans/latin-700.css';
 import './style.css';
 import { trackNewsletter } from './js/analytics.js';
 import { sendToHubSpot } from './js/hubspot.js';
