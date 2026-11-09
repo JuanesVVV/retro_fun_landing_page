@@ -29,16 +29,31 @@
   <meta name="twitter:description" content="Juega gratis los mejores videojuegos retro en tu navegador, sin descargas ni registro." />
   <meta name="twitter:image" content="https://juanesvvv.github.io/retro_fun_landing_page/og-image.jpg" />
 
-  <!-- Conexión anticipada a GTM -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KSDH6GXX');</script>
-  <!-- End Google Tag Manager -->
+ <!-- Google Tag Manager (carga diferida) -->
+<script>
+(function () {
+  var loaded = false;
+  function loadGTM() {
+    if (loaded) return;
+    loaded = true;
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KSDH6GXX');
+  }
+  ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (evt) {
+    window.addEventListener(evt, loadGTM, { once: true, passive: true });
+  });
+  setTimeout(loadGTM, 6000);
+})();
+</script>
+<!-- End Google Tag Manager -->
 
   <script type="application/ld+json">
   {
